@@ -1,12 +1,16 @@
 
-
 public class PaymentInfo {
-	private String paymentMethod;
+	
+	public enum PaymentType{
+		NONE, VISA, MASTERCARD, AMEX, INTERAC, CASH
+	}
+	
+	private PaymentType paymentMethod;
 	private Double totalValue;
 	// path to PDF file
 	private String deliveryConfirmationFile;
 	
-	public PaymentInfo(String paymentMethod, Double totalValue, String deliveryConfirmationFile) {
+	public PaymentInfo(PaymentType paymentMethod, Double totalValue, String deliveryConfirmationFile) {
 		super();
 		this.paymentMethod = paymentMethod;
 		this.totalValue = totalValue;
@@ -14,14 +18,14 @@ public class PaymentInfo {
 	}
 	
 	public PaymentInfo() {
-		this("none", 0.0, "");
+		this(PaymentType.NONE, 0.0, "");
 	}
 
-	public String getPaymentMethod() {
+	public PaymentType getPaymentMethod() {
 		return paymentMethod;
 	}
 	
-	public void setPaymentMethod(String paymentMethod) {
+	public void setPaymentMethod(PaymentType paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
 	
