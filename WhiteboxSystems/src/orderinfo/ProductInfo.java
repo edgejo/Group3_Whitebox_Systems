@@ -1,3 +1,4 @@
+package orderinfo;
 
 import java.util.Date;
 

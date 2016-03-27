@@ -1,3 +1,4 @@
+package orderinfo;
 
 public class PaymentInfo {
 	

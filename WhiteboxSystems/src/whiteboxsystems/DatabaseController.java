@@ -1,4 +1,7 @@
+package whiteboxsystems;
 import java.util.*;
+
+import orderinfo.OrderDetails;
 
 public class DatabaseController {
 	private GUI gui;

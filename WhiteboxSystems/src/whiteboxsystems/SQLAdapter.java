@@ -1,4 +1,7 @@
+package whiteboxsystems;
 import java.util.ArrayList;
+
+import orderinfo.OrderDetails;
 
 public class SQLAdapter implements DatabaseAdapter {
 
