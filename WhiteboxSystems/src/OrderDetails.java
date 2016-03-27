@@ -3,19 +3,19 @@ import java.util.*;
 
 public class OrderDetails {	
 	
-	private int buildID;
+	private Integer buildID;
 	private CustomerInfo customerInfo;
 	private PaymentInfo paymentInfo;
 	private Collection<ProductInfo> components;
 	
-	public OrderDetails(int buildID) {
+	public OrderDetails(Integer buildID) {
 		this.buildID = buildID;
 		this.customerInfo = new CustomerInfo();
 		this.paymentInfo = new PaymentInfo();
 		this.components = new ArrayList<ProductInfo>();
 	}
 	
-	public int getBuildID() {
+	public Integer getBuildID() {
 		return buildID;
 	}	
 	
