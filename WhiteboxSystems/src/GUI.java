@@ -23,7 +23,7 @@ public class GUI {
 	// on pressing "Submit New Order" button
 	public void submitNewOrderForm(){
 		// TODO populate orderDetails from fields in displayNewOrderForm
-		OrderDetails orderDetails = new OrderDetails();
+		OrderDetails orderDetails = new OrderDetails(-1);
 		databaseController.createNewOrder(orderDetails);
 	}
 }
