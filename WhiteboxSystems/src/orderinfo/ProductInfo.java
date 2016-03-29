@@ -17,7 +17,10 @@ public class ProductInfo {
 	private Integer salesOrderNum;
 	private Integer itemSKU;
 	
-	public ProductInfo(String componentType, String manufacturer, String description, String modelNum, String serialNum, Double rebateValue, Double price, String warrantyPeriod, String warrantyExpiry, String invoiceDate, Integer invoiceNum, Integer salesOrderNum, Integer itemSKU){
+	public ProductInfo(String componentType, String manufacturer, String description, 
+			String modelNum, String serialNum, Double rebateValue, Double price, 
+			String warrantyPeriod, String warrantyExpiry, String invoiceDate, Integer invoiceNum, 
+			Integer salesOrderNum, Integer itemSKU){
 		this.componentType = componentType;
 		this.manufacturer = manufacturer;
 		this.description = description;

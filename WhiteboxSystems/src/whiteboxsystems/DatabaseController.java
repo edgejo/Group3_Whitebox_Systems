@@ -1,7 +1,7 @@
 package whiteboxsystems;
 import java.util.*;
 
-import orderinfo.OrderDetails;
+import orderinfo.*;
 
 public class DatabaseController {
 	private GUI gui;
@@ -20,7 +20,7 @@ public class DatabaseController {
 	}
 	
 	public ArrayList<OrderDetails> getExistingOrders(){
-		return new ArrayList<OrderDetails>();
+		return this.databaseAdapter.getExistingOrders();
 	}
 	
 	public void createNewOrder(OrderDetails orderDetails){
