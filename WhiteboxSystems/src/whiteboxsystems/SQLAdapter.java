@@ -69,10 +69,12 @@ public class SQLAdapter implements DatabaseAdapter {
 			Collection<ProductInfo> productInfo = orderDetails.getComponents();
 			
 			//Update Table customer_info
+			// TODO query on CUSTOMER_ID instead of PHONE_NUMBER
 			String query = "SELECT * FROM customer_info WHERE " + PHONE_NUMBER + " = '" + customerInfo.getPhoneNum() + "'";
 			java.sql.Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			if (!rs.next() ) {
+				// TODO remove hardcoded CustomerID
 			    query = "INSERT INTO customer_info VALUES ('3', '" + orderDetails.getBuildID() + "', '" 
 			    		+ customerInfo.getName() + "', '" + customerInfo.getEmail() + "', '" 
 			    		+ customerInfo.getPhoneNum() + "', '" + customerInfo.getAddress() + "', '" 
