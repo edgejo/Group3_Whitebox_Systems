@@ -2,16 +2,12 @@ package orderinfo;
 
 public class PaymentInfo {
 	
-	public enum PaymentType{
-		NONE, VISA, MASTERCARD, AMEX, INTERAC, CASH
-	}
-	
-	private PaymentType paymentMethod;
+	private String paymentMethod;
 	private Double totalValue;
 	// path to PDF file
 	private String deliveryConfirmationFile;
 	
-	public PaymentInfo(PaymentType paymentMethod, Double totalValue, String deliveryConfirmationFile) {
+	public PaymentInfo(String paymentMethod, Double totalValue, String deliveryConfirmationFile) {
 		super();
 		this.paymentMethod = paymentMethod;
 		this.totalValue = totalValue;
@@ -19,14 +15,14 @@ public class PaymentInfo {
 	}
 	
 	public PaymentInfo() {
-		this(PaymentType.NONE, 0.0, "");
+		this("None", 0.0, "");
 	}
 
-	public PaymentType getPaymentMethod() {
+	public String getPaymentMethod() {
 		return paymentMethod;
 	}
 	
-	public void setPaymentMethod(PaymentType paymentMethod) {
+	public void setPaymentMethod(String paymentMethod) {
 		this.paymentMethod = paymentMethod;
 	}
 	
