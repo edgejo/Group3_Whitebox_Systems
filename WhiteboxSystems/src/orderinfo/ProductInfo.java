@@ -17,7 +17,20 @@ public class ProductInfo {
 	private Integer salesOrderNum;
 	private Integer itemSKU;
 	
-	public ProductInfo(){
+	public ProductInfo(String componentType, String manufacturer, String description, String modelNum, String serialNum, Double rebateValue, Double price, String warrantyPeriod, Date warrantyExpiry, Date invoiceDate, Integer invoiceNum, Integer salesOrderNum, Integer itemSKU){
+		this.componentType = componentType;
+		this.manufacturer = manufacturer;
+		this.description = description;
+		this.modelNum = modelNum;
+		this.serialNum = serialNum;
+		this.rebateValue = rebateValue;
+		this.price = price;
+		this.warrantyPeriod = warrantyPeriod;
+		this.warrantyExpiry = warrantyExpiry;
+		this.invoiceDate = invoiceDate;
+		this.invoiceNum = invoiceNum;
+		this.salesOrderNum = salesOrderNum;
+		this.itemSKU = itemSKU;
 	}
 
 	public String getComponentType() {
