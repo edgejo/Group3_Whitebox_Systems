@@ -83,7 +83,7 @@ public class GUI {
     	buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
     	Jbutton = new JButton("Create Order");
-    	Jbutton.addActionListener(new NewOrderButtonListener(mainFrame));
+    	Jbutton.addActionListener(new ButtonListener());
     	buttonPanel.add(Jbutton);
     }
     
@@ -101,8 +101,8 @@ public class GUI {
 	}
 }
 
-class NewOrderButtonListener implements ActionListener {
-	NewOrderButtonListener() {}
+class ButtonListener implements ActionListener {
+	ButtonListener() {}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Create Order")) {
