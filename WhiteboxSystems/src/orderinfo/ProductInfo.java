@@ -11,13 +11,13 @@ public class ProductInfo {
 	private Double rebateValue;
 	private Double price;
 	private String warrantyPeriod;
-	private Date warrantyExpiry;
-	private Date invoiceDate;
+	private String warrantyExpiry;
+	private String invoiceDate;
 	private Integer invoiceNum;
 	private Integer salesOrderNum;
 	private Integer itemSKU;
 	
-	public ProductInfo(String componentType, String manufacturer, String description, String modelNum, String serialNum, Double rebateValue, Double price, String warrantyPeriod, Date warrantyExpiry, Date invoiceDate, Integer invoiceNum, Integer salesOrderNum, Integer itemSKU){
+	public ProductInfo(String componentType, String manufacturer, String description, String modelNum, String serialNum, Double rebateValue, Double price, String warrantyPeriod, String warrantyExpiry, String invoiceDate, Integer invoiceNum, Integer salesOrderNum, Integer itemSKU){
 		this.componentType = componentType;
 		this.manufacturer = manufacturer;
 		this.description = description;
@@ -97,19 +97,19 @@ public class ProductInfo {
 		this.warrantyPeriod = warrantyPeriod;
 	}
 
-	public Date getWarrantyExpiry() {
+	public String getWarrantyExpiry() {
 		return warrantyExpiry;
 	}
 
-	public void setWarrantyExpiry(Date warrantyExpiry) {
+	public void setWarrantyExpiry(String warrantyExpiry) {
 		this.warrantyExpiry = warrantyExpiry;
 	}
 
-	public Date getInvoiceDate() {
+	public String getInvoiceDate() {
 		return invoiceDate;
 	}
 
-	public void setInvoiceDate(Date invoiceDate) {
+	public void setInvoiceDate(String invoiceDate) {
 		this.invoiceDate = invoiceDate;
 	}
 

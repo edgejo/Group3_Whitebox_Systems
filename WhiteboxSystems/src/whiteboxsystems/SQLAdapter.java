@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import com.mysql.jdbc.Statement;
 
@@ -15,8 +14,7 @@ import orderinfo.PaymentInfo;
 import orderinfo.ProductInfo;
 
 public class SQLAdapter implements DatabaseAdapter {
-	
-	
+		
 	public static Connection getConnection() throws Exception {
 		try {
 			String driver = "com.mysql.jdbc.Driver";
@@ -32,14 +30,63 @@ public class SQLAdapter implements DatabaseAdapter {
 		}
 	}
 
-
 	@Override
 	public void addOrder(OrderDetails orderDetails) {
 		// TODO Auto-generated method stub
-		
+		try {
+			Connection conn = getConnection();
+			CustomerInfo customerInfo = orderDetails.getCustomerInfo();
+			PaymentInfo paymentInfo = orderDetails.getPaymentInfo();
+			Collection<ProductInfo> productInfo = orderDetails.getComponents();
+			
+			//Update Table customer_info
+			String query = "SELECT * FROM customer_info WHERE `Phone Number` = '" + customerInfo.getPhoneNum() + "'";
+			java.sql.Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			if (!rs.next() ) {
+			    query = "INSERT INTO customer_info VALUES ('" + orderDetails.getBuildID() + "', '" + customerInfo.getName() + "', '" + customerInfo.getEmail() + "', '" + customerInfo.getPhoneNum() + "', '" + customerInfo.getAddress() + "', '" + customerInfo.getDeliveryDate() + "')";
+			} else {
+				query = "UPDATE customer_info SET `Build IDs` = '" + rs.getString("Build IDs") + "," + orderDetails.getBuildID() + "' WHERE `Phone Number` = '" + customerInfo.getPhoneNum() + "'";
+			}
+			System.out.println(query);
+			
+			st = conn.createStatement();
+			st.executeUpdate(query);
+			
+			//Update Table payment_info
+			query = "INSERT INTO payment_info VALUES ('" + paymentInfo.getPaymentMethod() + "', '" + paymentInfo.getTotalValue() + "', '" + paymentInfo.getDeliveryConfirmationFile() + "', '" + orderDetails.getBuildID() + "')";
+			System.out.println(query);
+			st = conn.createStatement();
+			st.executeUpdate(query);
+			
+			//Update Table product_info
+			ArrayList<ProductInfo> prodInfo = (ArrayList<ProductInfo>)productInfo;
+			for (int i = 0; i < prodInfo.size(); i++) {
+				query = "INSERT INTO product_info VALUES ('" + prodInfo.get(i).getComponentType() 
+						+ "', '" + prodInfo.get(i).getManufacturer() 
+						+ "', '" + prodInfo.get(i).getDescription() 
+						+ "', '"  + prodInfo.get(i).getModelNum() 
+						+ "', '"  + prodInfo.get(i).getSerialNum() 
+						+ "', '"  + prodInfo.get(i).getRebateValue() 
+						+ "', '"  + prodInfo.get(i).getPrice() 
+						+ "', '"  + prodInfo.get(i).getWarrantyPeriod() 
+						+ "', '" + prodInfo.get(i).getWarrantyExpiry() 
+						+ "', '" + prodInfo.get(i).getInvoiceDate() 
+						+ "', '" + prodInfo.get(i).getInvoiceNum() 
+						+ "', '" + prodInfo.get(i).getSalesOrderNum() 
+						+ "', '"   + prodInfo.get(i).getItemSKU() 
+						+ "', '" +  orderDetails.getBuildID() + "')";
+				st = conn.createStatement();
+				st.executeUpdate(query);
+				System.out.println(query);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
-
-	 
+	
+ 
 	public ArrayList<OrderDetails> getExistingOrders() {
 	// TODO Auto-generated method stub
 		try {
@@ -56,7 +103,7 @@ public class SQLAdapter implements DatabaseAdapter {
 				String email = rs.getString("Email");
 				String phoneNumber = rs.getString("Phone Number");
 				String address = rs.getString("Address");
-				Date deliveryDate = rs.getDate("Delivery Date");
+				String deliveryDate = rs.getString("Delivery Date");
 				System.out.println(buildIDs + " " + name + " " + email + " " + phoneNumber + " " + address + " " + deliveryDate);
 				String bIDs[] = buildIDs.split(","); 
 				for (int i = 0; i < bIDs.length; i++) {
@@ -95,8 +142,8 @@ public class SQLAdapter implements DatabaseAdapter {
 					Double rebateValue = rs.getDouble("Rebate Value");
 					Double price = rs.getDouble("Price");
 					String warrantyPeriod = rs.getString("Warranty Period");
-					Date warrantyExpiry = rs.getDate("Warranty Expiry");
-					Date invoiceDate = rs.getDate("Invoice Date");
+					String warrantyExpiry = rs.getString("Warranty Expiry");
+					String invoiceDate = rs.getString("Invoice Date");
 					Integer invoiceNumber = rs.getInt("Invoice Number");
 					Integer salesOrderNumber = rs.getInt("Sales Order Number");
 					Integer itemSKU = rs.getInt("Item SKU");
