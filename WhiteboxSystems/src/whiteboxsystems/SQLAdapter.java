@@ -47,10 +47,11 @@ public class SQLAdapter implements DatabaseAdapter {
 	public static Connection getConnection() throws Exception {
 		try {
 			String driver = "com.mysql.jdbc.Driver";
-			String url = "jdbc:mysql://localhost:3306/whiteboxsystems";
-			String username = "root";
-			String password = "123";
-			Class.forName(driver); Connection conn = DriverManager.getConnection(url,username,password);
+			String url = "jdbc:mysql://whiteboxsystemsdb.cvr6heqg7wkw.us-west-2.rds.amazonaws.com:3306/whiteboxsystems";
+			String username = "nfciotrestaurant";
+			String password = "HussainIsTheBest";
+			Class.forName(driver); 
+			Connection conn = DriverManager.getConnection(url,username,password);
 			System.out.println("Connected");
 			return conn;
 		} catch (Exception e) {
