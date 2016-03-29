@@ -75,8 +75,9 @@ public class SQLAdapter implements DatabaseAdapter {
 			java.sql.Statement st = conn.createStatement();
 			ResultSet rs = st.executeQuery(query);
 			if (!rs.next() ) {
-				// TODO remove hardcoded CustomerID
-			    query = "INSERT INTO customer_info VALUES ('3', '" + orderDetails.getBuildID() + "', '" 
+			    query = "INSERT INTO customer_info (" + CUSTOMER_BUILD_IDS + "," + NAME + "," + EMAIL + "," 
+			    		+ PHONE_NUMBER + "," + ADDRESS + "," + DELIVERY_DATE + ")"
+			    		+ "VALUES ('" + orderDetails.getBuildID() + "', '" 
 			    		+ customerInfo.getName() + "', '" + customerInfo.getEmail() + "', '" 
 			    		+ customerInfo.getPhoneNum() + "', '" + customerInfo.getAddress() + "', '" 
 			    		+ customerInfo.getDeliveryDate() + "')";
@@ -89,6 +90,7 @@ public class SQLAdapter implements DatabaseAdapter {
 			st = conn.createStatement();
 			st.executeUpdate(query);
 			
+			// TODO catch duplicate BUILD_ID
 			//Update Table payment_info
 			query = "INSERT INTO payment_info VALUES ('" + orderDetails.getBuildID() + "', '"
 					+ paymentInfo.getPaymentMethod() + "', '" + paymentInfo.getTotalValue() + "', '"
