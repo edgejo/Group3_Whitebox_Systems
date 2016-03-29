@@ -1,9 +1,12 @@
 package whiteboxsystems;
 import java.util.ArrayList;
+
+import orderinfo.CustomerInfo;
 import orderinfo.OrderDetails;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 //import javax.swing.event.*;
 
 
@@ -27,7 +30,7 @@ public class GUI {
 		// TODO display existingOrders in swing
 		// TODO create button "New Order" that calls displayNewOrderForm()
 		createButtonPanel();
-		createOrderPanel();
+		createOrderPanel(existingOrders);
 		createWindow();
 	}
 	
@@ -46,7 +49,7 @@ public class GUI {
         mainFrame.setVisible(true);
     }
     
-    public void createOrderPanel(){
+    public void createOrderPanel(ArrayList<OrderDetails> existingOrders){
 		//Order Panel
         orderPanel = new JPanel();
         orderPanel.setLayout(new BoxLayout(orderPanel, BoxLayout.X_AXIS));
@@ -56,14 +59,20 @@ public class GUI {
        //Order Table
       //TODO import fields from OrderDetails
         String colName[] = {"BuildID", "Name", "Email", "Phone Number"}; 
-        String rowValue[][] = 
-        	{
-        			{"1234", "Ahmed Omar", "ahmed@gmail.com", "6138545975"},
-        			{"1243", "Gaith Dalla-Ali", "ghaith@gmail.com", "61385552468"},
-        			{"2222", "Hassain Saeed", "hussain@gmail.com", "6135478596"},
-        			{"6984", "Jordan Edgecombe", "jordan@gmail.com", "6135874963"},
-        	};
-        orderTable = new JTable( rowValue, colName );
+        DefaultTableModel tableModel = new DefaultTableModel(colName, 0);
+
+        for (OrderDetails orderDetails: existingOrders){
+        	Integer buildID = orderDetails.getBuildID();
+        	CustomerInfo customerInfo = orderDetails.getCustomerInfo();
+        	String name = customerInfo.getName();
+        	String email = customerInfo.getEmail();
+        	String phoneNum = customerInfo.getPhoneNum();
+        	
+        	Object[] row = {buildID, name, email, phoneNum};
+        	tableModel.addRow(row);
+        }
+
+        orderTable = new JTable(tableModel);
         orderTable.setPreferredScrollableViewportSize(new Dimension(500,80));
         orderTable.setFillsViewportHeight(true);
         scrollTable = new JScrollPane( orderTable );
@@ -74,10 +83,9 @@ public class GUI {
     	buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
     	Jbutton = new JButton("Create Order");
-    	Jbutton.addActionListener(new ButtonListener());
+    	Jbutton.addActionListener(new NewOrderButtonListener(mainFrame));
     	buttonPanel.add(Jbutton);
     }
-
     
 	// on pressing "New Order" on displayExistingOrders view
 	public void displayNewOrderForm(){
@@ -93,14 +101,13 @@ public class GUI {
 	}
 }
 
-class ButtonListener implements ActionListener {
-	  ButtonListener() {
-	  }
+class NewOrderButtonListener implements ActionListener {
+	NewOrderButtonListener() {}
 
-	  public void actionPerformed(ActionEvent e) {
-	    if (e.getActionCommand().equals("Create Order")) {
-	      NewOrder order = new NewOrder();
-	      order.setVisible(true);
-	  }
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("Create Order")) {
+			NewOrder order = new NewOrder();
+			order.setVisible(true);
+		}
 	}
 }

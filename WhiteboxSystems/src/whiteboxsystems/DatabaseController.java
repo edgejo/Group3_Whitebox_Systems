@@ -1,6 +1,7 @@
 package whiteboxsystems;
 import java.util.*;
 
+import orderinfo.CustomerInfo;
 import orderinfo.OrderDetails;
 
 public class DatabaseController {
@@ -20,7 +21,13 @@ public class DatabaseController {
 	}
 	
 	public ArrayList<OrderDetails> getExistingOrders(){
-		return new ArrayList<OrderDetails>();
+		OrderDetails ahmed = new OrderDetails(1234);
+		CustomerInfo customerInfo1 = new CustomerInfo("Ahmed Omar", "ahmed@gmail.com", "6138545975", "1125 Colonel By Drive");
+		ahmed.setCustomerInfo(customerInfo1);
+		
+		ArrayList<OrderDetails> existingOrders = new ArrayList<OrderDetails>();
+		existingOrders.add(ahmed);
+		return existingOrders;
 	}
 	
 	public void createNewOrder(OrderDetails orderDetails){
