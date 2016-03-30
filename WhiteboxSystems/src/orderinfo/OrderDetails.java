@@ -9,8 +9,7 @@ public class OrderDetails {
 	private PaymentInfo paymentInfo;
 	private Collection<ProductInfo> components;
 	
-	public OrderDetails(Integer buildID) {
-		this.buildID = buildID;
+	public OrderDetails(String buildID) {
 		this.customerInfo = new CustomerInfo();
 		this.paymentInfo = new PaymentInfo();
 		this.components = new ArrayList<ProductInfo>();
