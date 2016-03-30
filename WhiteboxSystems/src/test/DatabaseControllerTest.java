@@ -36,7 +36,7 @@ public class DatabaseControllerTest {
 		databaseController.activate();
 		
 		//BuildId
-		String buildID = "abc123";
+		Integer buildID = 123;
 		//CustomerInfo
 		String customerInfoName = "John Doe";
 		String customerInfoEmail = "cust@email.com";
