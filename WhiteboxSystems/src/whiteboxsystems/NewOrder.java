@@ -30,7 +30,7 @@ public class NewOrder extends JFrame {
 	private JTextField name;
 	private JTextField email;
 	private JTextField phoneNumber;
-	private JButton btnNewButton;
+	private JButton submit;
 	
 	
 
@@ -78,6 +78,7 @@ public class NewOrder extends JFrame {
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 		
 		buildID = new JTextField();
+
 		GridBagConstraints gbc_buildID = new GridBagConstraints();
 		gbc_buildID.anchor = GridBagConstraints.NORTHEAST;
 		gbc_buildID.insets = new Insets(0, 0, 5, 5);
@@ -86,6 +87,7 @@ public class NewOrder extends JFrame {
 		gbc_buildID.gridy = 0;
 		contentPane.add(buildID, gbc_buildID);
 		buildID.setColumns(15);
+		
 		
 		JLabel lblNewLabel_1 = new JLabel("Name");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -143,16 +145,20 @@ public class NewOrder extends JFrame {
 		contentPane.add(phoneNumber, gbc_phoneNumber);
 		phoneNumber.setColumns(15);
 		
-		btnNewButton = new JButton("Submit");
-		btnNewButton.addActionListener(new ActionListener() {
+		submit = new JButton("Submit");
+		submit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				 buildID.getText();
+				 name.getText();
+				 email.getText();
+				 phoneNumber.getText();
 			}
 		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 4;
-		gbc_btnNewButton.gridy = 4;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
+		GridBagConstraints gbc_submit = new GridBagConstraints();
+		gbc_submit.insets = new Insets(0, 0, 5, 5);
+		gbc_submit.gridx = 4;
+		gbc_submit.gridy = 4;
+		contentPane.add(submit, gbc_submit);
 		
 	}
 }
