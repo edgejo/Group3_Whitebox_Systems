@@ -2,13 +2,17 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-import junit.framework.Assert;
 import orderinfo.CustomerInfo;
 import orderinfo.OrderDetails;
 import orderinfo.PaymentInfo;
@@ -17,6 +21,41 @@ import whiteboxsystems.DatabaseController;
 
 public class DatabaseControllerTest {
 
+	@BeforeClass
+	public static void deleteData(){
+		
+		ArrayList<String> tableNames = new ArrayList<String>(Arrays.asList(
+				"customer_info", "payment_info", "product_info"));
+		
+		Connection conn = null;
+		try {
+			String driver = "com.mysql.jdbc.Driver";
+			String url = "jdbc:mysql://whiteboxsystemsdb.cvr6heqg7wkw.us-west-2.rds.amazonaws.com:3306/whiteboxsystems";
+			String username = "nfciotrestaurant";
+			String password = "HussainIsTheBest";
+			Class.forName(driver); 
+			conn = DriverManager.getConnection(url,username,password);
+			System.out.println("Connected");
+		} catch (Exception e) {
+			System.out.println(e);
+			fail();
+		}
+		
+		for (String tableName : tableNames){
+			Statement st;
+			try {
+				if (conn != null){
+					st = conn.createStatement();
+					st.executeUpdate("DELETE FROM " + tableName + ";");	
+					System.out.println("Deleted table " + tableName);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 //	@Test
 //	public void testDatabaseController() {
 //		DatabaseController dbController = new DatabaseController();
@@ -62,7 +101,8 @@ public class DatabaseControllerTest {
 		//ProductInfo
 		String productInfoComponentType = "Motherboard";
 		String productInfoManufacturer = "Asus";
-		String productInfoDescription = "It's not a fatherboard.";
+		// TODO revert back to "It's" and catch and fix apostrophe bug
+		String productInfoDescription = "Its not a fatherboard.";
 		String productInfoModelNum = "ABC123XXX";
 		String productInfoSerialNum = "XXX321CBA";
 		Double productInfoRebateValue = 11.1;
@@ -96,7 +136,13 @@ public class DatabaseControllerTest {
 		od.setCustomerInfo(custInfo);
 		od.setPaymentInfo(payInfo);
 		od.setComponents(components);
-		databaseController.createNewOrder(od);
+		
+		try {
+			databaseController.createNewOrder(od);
+		} catch (Exception e){
+			e.printStackTrace();
+			fail("Exception occurred");
+		}
 		
 		//TODO some sort of assert?
 		
