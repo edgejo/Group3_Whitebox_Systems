@@ -142,7 +142,7 @@ public class DatabaseControllerTest {
 
 		//*** start of testCreateNewOrder ***
 		//BuildId
-		Integer buildID = 1231111111111111111;
+		Integer buildID = 123;
 		//CustomerInfo
 		String customerInfoName = "John Doe Doe Doe Doe Doe Doe Bada Bo";
 		String customerInfoEmail = "cust@email.com 123";

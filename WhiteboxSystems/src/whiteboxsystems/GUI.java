@@ -1,6 +1,5 @@
 package whiteboxsystems;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import orderinfo.CustomerInfo;
 import orderinfo.OrderDetails;
@@ -11,11 +10,9 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-//import javax.swing.event.*;
 
 
 public class GUI {
-	
 	DatabaseController databaseController;
 	JFrame mainFrame;
 	JPanel orderPanel;
@@ -26,13 +23,10 @@ public class GUI {
 	
 	public GUI(DatabaseController databaseController){
 		this.databaseController = databaseController;
-
 	}
 	
 	// on start and after submitting new order
 	public void displayExistingOrders(ArrayList<OrderDetails> existingOrders){
-		// TODO display existingOrders in swing
-		// TODO create button "New Order" that calls displayNewOrderForm()
 		createButtonPanel();
 		createOrderPanel(existingOrders);
 		createWindow();
@@ -60,14 +54,16 @@ public class GUI {
         orderPanel.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY, 2));
         orderPanel.setBorder(BorderFactory.createTitledBorder("Order Details"));
         
-       //Order Table
-      //TODO import fields from OrderDetails
-        String colName[] = {"BuildID", "Name", "Email", "Phone Number", "Address", "Deliver Date", "Payment Method", "Total Value", "Delivery Confimation"
-        						, "Component Type", "Manufacturer", "Description", "Model Number", "Serial Number", "Rebate Value", "Price", "Warranty Period",
-        						"Warranty Expiry", "Invoice Date", "Invoice Number", "Sales Order Number", "Item SKU"
-        					}; 
+        //Order Table
+        String colName[] = {"BuildID", "Name", "Email", "Phone Number", "Address", "Delivery Date", 
+        					"Payment Method", "Total Value", "Delivery Confimation", "Component Type", 
+        					"Manufacturer", "Description", "Model Number", "Serial Number", "Rebate Value", 
+        					"Price", "Warranty Period", "Warranty Expiry", "Invoice Date", "Invoice Number",
+        					"Sales Order Number", "Item SKU"};
+        
         DefaultTableModel tableModel = new DefaultTableModel(colName, 0);
 
+        // get orderDetails parameters
         for (OrderDetails orderDetails: existingOrders){
         	Integer buildID = orderDetails.getBuildID();
         	CustomerInfo customerInfo = orderDetails.getCustomerInfo();
@@ -83,7 +79,6 @@ public class GUI {
         	Double totalValue = paymentInfo.getTotalValue();
         	String deliveryConfirmaionFile = paymentInfo.getDeliveryConfirmationFile();
         	
-        	
         	String componentType = "";
         	String manufacturer = "";
         	String description = "";
@@ -98,7 +93,7 @@ public class GUI {
         	Integer saleOrderNum = 0;
         	Integer itemSKU = 0;
         	
-        	if(!components.isEmpty()){
+        	if (!components.isEmpty()){
 	        	ProductInfo component = components.get(0);
 	        	componentType = component.getComponentType();
 	        	manufacturer = component.getManufacturer();
@@ -114,9 +109,11 @@ public class GUI {
 	        	saleOrderNum = component.getSalesOrderNum();
 	        	itemSKU = component.getItemSKU();
         	}
-        	Object[] row = {buildID, name, email, phoneNum, address, deliveryDate, paymentMethod, totalValue, deliveryConfirmaionFile,
-        					componentType, manufacturer, description, modelNum, serialNum, rebateValue, price, warrantyPeriod, 
-        					warrantyExpiry, invoiceDate, invoiceNum, saleOrderNum, itemSKU
+        	
+        	Object[] row = {buildID, name, email, phoneNum, address, deliveryDate, paymentMethod, totalValue, 
+        					deliveryConfirmaionFile, componentType, manufacturer, description, modelNum, 
+        					serialNum, rebateValue, price, warrantyPeriod, warrantyExpiry, invoiceDate, 
+        					invoiceNum, saleOrderNum, itemSKU
         					};
         	tableModel.addRow(row);
         }
@@ -135,14 +132,6 @@ public class GUI {
     	Jbutton.addActionListener(new ButtonListener(this));
     	buttonPanel.add(Jbutton);
     }
-    
-	// on pressing "New Order" on displayExistingOrders view
-	public void displayNewOrderForm(){
-		// TODO display form with empty fields
-		// TODO create button "Submit New Order" that calls submitNewOrderForm()
-	}
-	
-
 }
 
 class ButtonListener implements ActionListener {
@@ -154,7 +143,7 @@ class ButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Create Order")) {
-			NewOrder order = new NewOrder(gui.databaseController);
+			NewOrderWindow order = new NewOrderWindow(gui.databaseController);
 			order.setVisible(true);
 		}
 	}

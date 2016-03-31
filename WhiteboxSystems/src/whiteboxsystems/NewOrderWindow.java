@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Font;
 
-public class NewOrder extends JFrame {
+public class NewOrderWindow extends JFrame {
 
 	/**
 	 * 
@@ -72,7 +72,7 @@ public class NewOrder extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewOrder(DatabaseController databaseController) {
+	public NewOrderWindow(DatabaseController databaseController) {
 		this.databaseController = databaseController;
 		setTitle("WhiteBox Systems");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,14 +97,14 @@ public class NewOrder extends JFrame {
 		
 		buildIDTextField = new JTextField();
 		
-				GridBagConstraints gbc_buildID = new GridBagConstraints();
-				gbc_buildID.fill = GridBagConstraints.HORIZONTAL;
-				gbc_buildID.anchor = GridBagConstraints.NORTH;
-				gbc_buildID.insets = new Insets(0, 0, 5, 5);
-				gbc_buildID.gridx = 2;
-				gbc_buildID.gridy = 1;
-				contentPane.add(buildIDTextField, gbc_buildID);
-				buildIDTextField.setColumns(15);
+		GridBagConstraints gbc_buildID = new GridBagConstraints();
+		gbc_buildID.fill = GridBagConstraints.HORIZONTAL;
+		gbc_buildID.anchor = GridBagConstraints.NORTH;
+		gbc_buildID.insets = new Insets(0, 0, 5, 5);
+		gbc_buildID.gridx = 2;
+		gbc_buildID.gridy = 1;
+		contentPane.add(buildIDTextField, gbc_buildID);
+		buildIDTextField.setColumns(15);
 		
 		lblProductInformation = new JLabel("Product Information ");
 		lblProductInformation.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -266,7 +266,7 @@ public class NewOrder extends JFrame {
 					if (buildID != null){
 						OrderDetails orderDetails = new OrderDetails(buildID);
 						
-						// populate CustomerInfo
+						// get customerInfo parameters from GUI
 						CustomerInfo customerInfo = new CustomerInfo();
 						String name = nameTextField.getText();
 						String email = emailTextField.getText();
@@ -278,21 +278,21 @@ public class NewOrder extends JFrame {
 						customerInfo.setEmail(email);
 						customerInfo.setPhoneNum(phoneNumber);
 						customerInfo.setDeliveryDate(deliverDate);
-						
 						orderDetails.setCustomerInfo(customerInfo);
-						
+
+						// get paymentInfo parameters from GUI
 						PaymentInfo paymentInfo = new PaymentInfo();
 						String paymentMethod = paymentMethodTextField.getText();
 						Double totalValue = Double.parseDouble(totalValueTextField.getText());
 						String deliveryConfirmationFile = confirmationFileTextField.getText();
 
-						// TODO paymentInfo setters
+						// paymentInfo setters
 						paymentInfo.setPaymentMethod(paymentMethod);
 						paymentInfo.setTotalValue(totalValue);
 						paymentInfo.setDeliveryConfirmationFile(deliveryConfirmationFile);
 						orderDetails.setPaymentInfo(paymentInfo);
 
-						// components
+						// get component parameters from GUI
 						ProductInfo productInfo = new ProductInfo();
 						String componentType = componentTypeTextField.getText();
 						String manufacturer = manufacturerTextField.getText();
@@ -308,6 +308,7 @@ public class NewOrder extends JFrame {
 						Integer salesOrderNum = Integer.parseInt(salesTextField.getText());
 						Integer itemSKU = Integer.parseInt(itemSKUTextField.getText());
 						
+						// productInfo Setters
 						productInfo.setComponentType(componentType);
 						productInfo.setComponentType(componentType);
 						productInfo.setManufacturer(manufacturer);
@@ -323,8 +324,7 @@ public class NewOrder extends JFrame {
 						productInfo.setSalesOrderNum(salesOrderNum);
 						productInfo.setItemSKU(itemSKU);
 						
-						// TODO ProductInfo setters
-						
+						// add component(s) to orderDetails
 						ArrayList<ProductInfo> components = new ArrayList<>();
 						components.add(productInfo);
 						orderDetails.setComponents(components);
@@ -561,12 +561,11 @@ public class NewOrder extends JFrame {
 		gbc_submit.gridx = 2;
 		gbc_submit.gridy = 16;
 		contentPane.add(submit, gbc_submit);
-		
 	}
+	
 	// on pressing "Submit New Order" button
 	public void submitNewOrderForm(OrderDetails orderDetails){
 		databaseController.createNewOrder(orderDetails);
-		
 	}
 }
 

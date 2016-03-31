@@ -13,7 +13,6 @@ public class DatabaseController {
 	
 	// TODO rename later; this method takes you back to the ExistingOrders page
 	public void activate(){
-		// TODO create database connection/instance
 		ArrayList<OrderDetails> existingOrders = getExistingOrders();
 		this.gui.displayExistingOrders(existingOrders);
 	}
