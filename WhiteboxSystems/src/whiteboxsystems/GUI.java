@@ -1,8 +1,12 @@
 package whiteboxsystems;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import orderinfo.CustomerInfo;
 import orderinfo.OrderDetails;
+import orderinfo.PaymentInfo;
+import orderinfo.ProductInfo;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -58,17 +62,62 @@ public class GUI {
         
        //Order Table
       //TODO import fields from OrderDetails
-        String colName[] = {"BuildID", "Name", "Email", "Phone Number"}; 
+        String colName[] = {"BuildID", "Name", "Email", "Phone Number", "Address", "Deliver Date", "Payment Method", "Total Value", "Delivery Confimation"
+        						, "Component Type", "Manufacturer", "Description", "Model Number", "Serial Number", "Rebate Value", "Price", "Warranty Period",
+        						"Warranty Expiry", "Invoice Date", "Invoice Number", "Sales Order Number", "Item SKU"
+        					}; 
         DefaultTableModel tableModel = new DefaultTableModel(colName, 0);
 
         for (OrderDetails orderDetails: existingOrders){
         	Integer buildID = orderDetails.getBuildID();
         	CustomerInfo customerInfo = orderDetails.getCustomerInfo();
+        	PaymentInfo paymentInfo = orderDetails.getPaymentInfo();
+        	ArrayList<ProductInfo> components = (ArrayList<ProductInfo>) orderDetails.getComponents();
+        	
         	String name = customerInfo.getName();
         	String email = customerInfo.getEmail();
         	String phoneNum = customerInfo.getPhoneNum();
+        	String address = customerInfo.getAddress();
+        	String deliveryDate = customerInfo.getDeliveryDate();
+        	String paymentMethod = paymentInfo.getPaymentMethod();
+        	Double totalValue = paymentInfo.getTotalValue();
+        	String deliveryConfirmaionFile = paymentInfo.getDeliveryConfirmationFile();
         	
-        	Object[] row = {buildID, name, email, phoneNum};
+        	
+        	String componentType = "";
+        	String manufacturer = "";
+        	String description = "";
+        	String modelNum = "";
+        	String serialNum = "";
+        	Double rebateValue = 0.0;
+        	Double price = 0.0;
+        	String warrantyPeriod = "";
+        	String warrantyExpiry = "";
+        	String invoiceDate = "";
+        	Integer invoiceNum = 0;
+        	Integer saleOrderNum = 0;
+        	Integer itemSKU = 0;
+        	
+        	if(!components.isEmpty()){
+	        	ProductInfo component = components.get(0);
+	        	componentType = component.getComponentType();
+	        	manufacturer = component.getManufacturer();
+	        	description = component.getDescription();
+	        	modelNum = component.getModelNum();
+	        	serialNum = component.getSerialNum();
+	        	rebateValue = component.getRebateValue();
+	        	price = component.getPrice();
+	        	warrantyPeriod = component.getWarrantyPeriod();
+	        	warrantyExpiry = component.getWarrantyExpiry();
+	        	invoiceDate = component.getInvoiceDate();
+	        	invoiceNum = component.getInvoiceNum();
+	        	saleOrderNum = component.getSalesOrderNum();
+	        	itemSKU = component.getItemSKU();
+        	}
+        	Object[] row = {buildID, name, email, phoneNum, address, deliveryDate, paymentMethod, totalValue, deliveryConfirmaionFile,
+        					componentType, manufacturer, description, modelNum, serialNum, rebateValue, price, warrantyPeriod, 
+        					warrantyExpiry, invoiceDate, invoiceNum, saleOrderNum, itemSKU
+        					};
         	tableModel.addRow(row);
         }
 
@@ -83,7 +132,7 @@ public class GUI {
     	buttonPanel = new JPanel();
         buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.X_AXIS));
     	Jbutton = new JButton("Create Order");
-    	Jbutton.addActionListener(new ButtonListener());
+    	Jbutton.addActionListener(new ButtonListener(this));
     	buttonPanel.add(Jbutton);
     }
     
@@ -93,20 +142,19 @@ public class GUI {
 		// TODO create button "Submit New Order" that calls submitNewOrderForm()
 	}
 	
-	// on pressing "Submit New Order" button
-	public void submitNewOrderForm(){
-		// TODO populate orderDetails from fields in displayNewOrderForm
-		OrderDetails orderDetails = new OrderDetails(-1);
-		databaseController.createNewOrder(orderDetails);
-	}
+
 }
 
 class ButtonListener implements ActionListener {
-	ButtonListener() {}
+	private GUI gui;
+	
+	ButtonListener(GUI gui) {
+		this.gui = gui;
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Create Order")) {
-			NewOrder order = new NewOrder();
+			NewOrder order = new NewOrder(gui.databaseController);
 			order.setVisible(true);
 		}
 	}
