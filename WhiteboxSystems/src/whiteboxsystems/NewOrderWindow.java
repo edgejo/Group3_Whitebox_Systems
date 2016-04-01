@@ -646,7 +646,6 @@ public class NewOrderWindow extends JFrame {
 		productInfo.setItemSKU(itemSKU);
 		
 		// add component(s) to orderDetails
-		//ArrayList<ProductInfo> components = new ArrayList<>();
 		components.add(productInfo);
 		orderDetails.setComponents(components);
 		guiManager.submitNewOrder(orderDetails);
