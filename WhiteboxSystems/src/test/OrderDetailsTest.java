@@ -14,16 +14,8 @@ public class OrderDetailsTest {
 	
     @Before
     public void setUp() {
-		orderDetails = new OrderDetails(buildID);
+		orderDetails = new OrderDetails();
     }
-	
-	@Test
-	public void testOrderDetails() {
-		// TODO what exactly to test for?
-		orderDetails = new OrderDetails(1);
-		orderDetails = new OrderDetails(2);
-		orderDetails = new OrderDetails(3);
-	}
 
 	@Test
 	public void testGetBuildID() {

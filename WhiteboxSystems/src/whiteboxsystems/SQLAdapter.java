@@ -3,6 +3,7 @@ package whiteboxsystems;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -64,6 +65,10 @@ public class SQLAdapter implements DatabaseAdapter {
 	public void addOrder(OrderDetails orderDetails) {
 		// TODO Auto-generated method stub
 		try {
+			// get the next BuildID available
+			Integer buildID = getNextBuildID();
+			orderDetails.setBuildID(buildID);
+			
 			Connection conn = getConnection();
 			CustomerInfo customerInfo = orderDetails.getCustomerInfo();
 			PaymentInfo paymentInfo = orderDetails.getPaymentInfo();
@@ -126,8 +131,32 @@ public class SQLAdapter implements DatabaseAdapter {
 			e.printStackTrace();
 		}
 	}
+
+	private Integer getNextBuildID() throws Exception{
+		String query = "SELECT MAX(" + PAYMENT_BUILD_ID + ") FROM payment_info;";
+		
+		Integer buildID = null;
+		
+		Connection conn;
+		try {
+			conn = getConnection();
+			Statement st = conn.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			
+			while (rs.next()) {
+				buildID = rs.getInt(".MAX(" + PAYMENT_BUILD_ID + ")");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (buildID == null){
+			throw new Exception();
+		}
+		
+		return buildID + 1;
+	}
 	
- 
 	public ArrayList<OrderDetails> getExistingOrders() {
 	// TODO Auto-generated method stub
 		try {
@@ -148,7 +177,8 @@ public class SQLAdapter implements DatabaseAdapter {
 				System.out.println(buildIDs + " " + name + " " + email + " " + phoneNumber + " " + address + " " + deliveryDate);
 				String bIDs[] = buildIDs.split(","); 
 				for (int i = 0; i < bIDs.length; i++) {
-					OrderDetails od = new OrderDetails(Integer.parseInt(bIDs[i]));
+					OrderDetails od = new OrderDetails();
+					od.setBuildID(Integer.parseInt(bIDs[i]));
 					CustomerInfo ci = new CustomerInfo(name, email, phoneNumber, address, deliveryDate);
 					od.setCustomerInfo(ci);
 					orderDetailsList.add(od);

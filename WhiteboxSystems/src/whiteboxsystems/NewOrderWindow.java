@@ -513,7 +513,7 @@ public class NewOrderWindow extends JFrame {
 	public void submitNewOrder() throws Exception{
 		Integer buildID = Integer.parseInt(buildIDTextField.getText());
 		if (buildID != null){
-			OrderDetails orderDetails = new OrderDetails(buildID);
+			OrderDetails orderDetails = new OrderDetails();
 			
 			// get customerInfo parameters from GUI
 			CustomerInfo customerInfo = new CustomerInfo();

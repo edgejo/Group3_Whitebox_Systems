@@ -119,7 +119,7 @@ public class DatabaseControllerTest {
 		components.add(prodInfo);
 
 		//Create order details
-		OrderDetails od = new OrderDetails(buildID);
+		OrderDetails od = new OrderDetails();
 		od.setCustomerInfo(custInfo);
 		od.setPaymentInfo(payInfo);
 		od.setComponents(components);
@@ -198,7 +198,7 @@ public class DatabaseControllerTest {
 		components.add(prodInfo);
 
 		//Create order details
-		OrderDetails od = new OrderDetails(buildID);
+		OrderDetails od = new OrderDetails();
 		od.setCustomerInfo(custInfo);
 		od.setPaymentInfo(payInfo);
 		od.setComponents(components);
