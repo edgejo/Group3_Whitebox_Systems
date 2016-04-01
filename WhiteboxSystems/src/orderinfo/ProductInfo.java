@@ -1,7 +1,5 @@
 package orderinfo;
 
-import java.util.Date;
-
 public class ProductInfo {
 	private String componentType;
 	private String manufacturer;
@@ -18,7 +16,6 @@ public class ProductInfo {
 	private Integer itemSKU;
 	
 	public ProductInfo(){
-		
 	}
 	
 	public ProductInfo(String componentType, String manufacturer, String description, 
@@ -142,5 +139,32 @@ public class ProductInfo {
 
 	public void setItemSKU(Integer itemSKU) {
 		this.itemSKU = itemSKU;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+ 
+        if (!(o instanceof ProductInfo)) {
+            return false;
+        }
+         
+        ProductInfo productInfo = (ProductInfo) o;
+		
+		return (this.getComponentType().equals(productInfo.getComponentType())
+				&& this.getManufacturer().equals(productInfo.getManufacturer())
+				&& this.getDescription().equals(productInfo.getDescription())
+				&& this.getModelNum().equals(productInfo.getModelNum())
+				&& this.getSerialNum().equals(productInfo.getSerialNum())
+				&& this.getRebateValue().equals(productInfo.getRebateValue())
+				&& this.getPrice().equals(productInfo.getPrice())
+				&& this.getWarrantyPeriod().equals(productInfo.getWarrantyPeriod())
+				&& this.getWarrantyExpiry().equals(productInfo.getWarrantyExpiry())
+				&& this.getInvoiceDate().equals(productInfo.getInvoiceDate())
+				&& this.getInvoiceNum().equals(productInfo.getInvoiceNum())
+				&& this.getSalesOrderNum().equals(productInfo.getSalesOrderNum())
+				&& this.getItemSKU().equals(productInfo.getItemSKU()));
 	}
 }

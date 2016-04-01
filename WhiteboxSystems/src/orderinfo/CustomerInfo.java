@@ -72,4 +72,23 @@ public class CustomerInfo {
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+ 
+        if (!(o instanceof CustomerInfo)) {
+            return false;
+        }
+         
+        CustomerInfo customerInfo = (CustomerInfo) o;
+		
+		return (this.getName().equals(customerInfo.getName())
+				&& this.getEmail().equals(customerInfo.getEmail())
+				&& this.getPhoneNum().equals(customerInfo.getPhoneNum())
+				&& this.getAddress().equals(customerInfo.getAddress())
+				&& this.getDeliveryDate().equals(customerInfo.getDeliveryDate()));
+	}
 }

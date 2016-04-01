@@ -46,4 +46,22 @@ public class OrderDetails {
 	public void setComponents(Collection<ProductInfo> components) {
 		this.components = components;
 	}
+	
+	@Override
+	public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+ 
+        if (!(o instanceof OrderDetails)) {
+            return false;
+        }
+         
+        OrderDetails orderDetails = (OrderDetails) o;
+		
+		return (this.getBuildID().equals(orderDetails.getBuildID())
+				&& this.getCustomerInfo().equals(orderDetails.getCustomerInfo())
+				&& this.getPaymentInfo().equals(orderDetails.getPaymentInfo())
+				&& this.getComponents().equals(orderDetails.getComponents()));
+	}
 }

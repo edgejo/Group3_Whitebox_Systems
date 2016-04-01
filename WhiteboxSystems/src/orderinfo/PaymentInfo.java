@@ -42,4 +42,21 @@ public class PaymentInfo {
 		this.deliveryConfirmationFile = deliveryConfirmationFile;
 	}	
 	
+	@Override
+	public boolean equals(Object o){
+        if (o == this) {
+            return true;
+        }
+ 
+        if (!(o instanceof PaymentInfo)) {
+            return false;
+        }
+         
+        PaymentInfo paymentInfo = (PaymentInfo) o;
+		
+		return (this.getPaymentMethod().equals(paymentInfo.getPaymentMethod())
+				&& this.getTotalValue().equals(paymentInfo.getTotalValue())
+				&& this.getDeliveryConfirmationFile().equals(paymentInfo.getDeliveryConfirmationFile()));
+	}
+	
 }

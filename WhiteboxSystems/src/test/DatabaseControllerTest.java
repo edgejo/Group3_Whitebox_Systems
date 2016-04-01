@@ -62,8 +62,6 @@ public class DatabaseControllerTest {
 		databaseController.displayExistingOrders();
 
 		//*** start of testCreateNewOrder ***
-		//BuildId
-		Integer buildID = 123;
 		//CustomerInfo
 		String customerInfoName = "John Doe";
 		String customerInfoEmail = "cust@email.com";
