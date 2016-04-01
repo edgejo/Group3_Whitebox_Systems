@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import orderinfo.*;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
@@ -258,80 +259,7 @@ public class NewOrderWindow extends JFrame {
 		contentPane.add(lblDeliveryDate, gbc_lblDeliveryDate);
 		
 		submit = new JButton("Submit");
-		submit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (e.getActionCommand().equals("Submit")) {
-					Integer buildID = Integer.parseInt(buildIDTextField.getText());
-					if (buildID != null){
-						OrderDetails orderDetails = new OrderDetails(buildID);
-						
-						// get customerInfo parameters from GUI
-						CustomerInfo customerInfo = new CustomerInfo();
-						String name = nameTextField.getText();
-						String email = emailTextField.getText();
-						String phoneNumber = phoneNumberTextField.getText();
-						String deliverDate = deliverDateTextField.getText();
-						
-						//customerInfo Setters
-						customerInfo.setName(name);
-						customerInfo.setEmail(email);
-						customerInfo.setPhoneNum(phoneNumber);
-						customerInfo.setDeliveryDate(deliverDate);
-						orderDetails.setCustomerInfo(customerInfo);
-
-						// get paymentInfo parameters from GUI
-						PaymentInfo paymentInfo = new PaymentInfo();
-						String paymentMethod = paymentMethodTextField.getText();
-						Double totalValue = Double.parseDouble(totalValueTextField.getText());
-						String deliveryConfirmationFile = confirmationFileTextField.getText();
-
-						// paymentInfo setters
-						paymentInfo.setPaymentMethod(paymentMethod);
-						paymentInfo.setTotalValue(totalValue);
-						paymentInfo.setDeliveryConfirmationFile(deliveryConfirmationFile);
-						orderDetails.setPaymentInfo(paymentInfo);
-
-						// get component parameters from GUI
-						ProductInfo productInfo = new ProductInfo();
-						String componentType = componentTypeTextField.getText();
-						String manufacturer = manufacturerTextField.getText();
-						String description = descriptionTextField.getText();
-						String modelNum = modelNumTextField.getText();
-						String serialNum = serialNumTextField.getText();
-						Double rebateValue = Double.parseDouble(rebateValueTextField.getText());
-						Double price = Double.parseDouble(priceTextField.getText());
-						String warrantyPeriod = warantyPeriodTextField.getText();
-						String warrantyExpiry = warantyExpiryTextField.getText();
-						String invoiceDate = invoiceDateTextField.getText();
-						Integer invoiceNum = Integer.parseInt(InvoiceNumTextField.getText());
-						Integer salesOrderNum = Integer.parseInt(salesTextField.getText());
-						Integer itemSKU = Integer.parseInt(itemSKUTextField.getText());
-						
-						// productInfo Setters
-						productInfo.setComponentType(componentType);
-						productInfo.setComponentType(componentType);
-						productInfo.setManufacturer(manufacturer);
-						productInfo.setDescription(description);
-						productInfo.setModelNum(modelNum);
-						productInfo.setSerialNum(serialNum);
-						productInfo.setRebateValue(rebateValue);
-						productInfo.setPrice(price);
-						productInfo.setWarrantyPeriod(warrantyPeriod);
-						productInfo.setWarrantyExpiry(warrantyExpiry);
-						productInfo.setInvoiceDate(invoiceDate);
-						productInfo.setInvoiceNum(invoiceNum);
-						productInfo.setSalesOrderNum(salesOrderNum);
-						productInfo.setItemSKU(itemSKU);
-						
-						// add component(s) to orderDetails
-						ArrayList<ProductInfo> components = new ArrayList<>();
-						components.add(productInfo);
-						orderDetails.setComponents(components);
-						submitNewOrderForm(orderDetails);
-					}
-				}
-			}
-		});
+		submit.addActionListener(new ButtonListener(this));
 		
 		deliverDateTextField = new JTextField();
 		deliverDateTextField.setColumns(15);
@@ -564,9 +492,93 @@ public class NewOrderWindow extends JFrame {
 		this.setVisible(true);
 	}
 	
-	// on pressing "Submit New Order" button
-	public void submitNewOrderForm(OrderDetails orderDetails){
-		guiManager.submitNewOrder(orderDetails);
+	class ButtonListener implements ActionListener {
+		private NewOrderWindow newOrderWindow;
+		
+		ButtonListener(NewOrderWindow newOrderWindow) {
+			this.newOrderWindow = newOrderWindow;
+		}
+
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand().equals("Submit")) {
+				try {
+					submitNewOrder();
+				} catch (Exception exception){
+					JOptionPane.showMessageDialog(newOrderWindow, "Invalid information");
+				}
+			}
+		}
+	}
+	
+	public void submitNewOrder() throws Exception{
+		Integer buildID = Integer.parseInt(buildIDTextField.getText());
+		if (buildID != null){
+			OrderDetails orderDetails = new OrderDetails(buildID);
+			
+			// get customerInfo parameters from GUI
+			CustomerInfo customerInfo = new CustomerInfo();
+			String name = nameTextField.getText();
+			String email = emailTextField.getText();
+			String phoneNumber = phoneNumberTextField.getText();
+			String deliverDate = deliverDateTextField.getText();
+			
+			//customerInfo Setters
+			customerInfo.setName(name);
+			customerInfo.setEmail(email);
+			customerInfo.setPhoneNum(phoneNumber);
+			customerInfo.setDeliveryDate(deliverDate);
+			orderDetails.setCustomerInfo(customerInfo);
+	
+			// get paymentInfo parameters from GUI
+			PaymentInfo paymentInfo = new PaymentInfo();
+			String paymentMethod = paymentMethodTextField.getText();
+			Double totalValue = Double.parseDouble(totalValueTextField.getText());
+			String deliveryConfirmationFile = confirmationFileTextField.getText();
+	
+			// paymentInfo setters
+			paymentInfo.setPaymentMethod(paymentMethod);
+			paymentInfo.setTotalValue(totalValue);
+			paymentInfo.setDeliveryConfirmationFile(deliveryConfirmationFile);
+			orderDetails.setPaymentInfo(paymentInfo);
+	
+			// get component parameters from GUI
+			ProductInfo productInfo = new ProductInfo();
+			String componentType = componentTypeTextField.getText();
+			String manufacturer = manufacturerTextField.getText();
+			String description = descriptionTextField.getText();
+			String modelNum = modelNumTextField.getText();
+			String serialNum = serialNumTextField.getText();
+			Double rebateValue = Double.parseDouble(rebateValueTextField.getText());
+			Double price = Double.parseDouble(priceTextField.getText());
+			String warrantyPeriod = warantyPeriodTextField.getText();
+			String warrantyExpiry = warantyExpiryTextField.getText();
+			String invoiceDate = invoiceDateTextField.getText();
+			Integer invoiceNum = Integer.parseInt(InvoiceNumTextField.getText());
+			Integer salesOrderNum = Integer.parseInt(salesTextField.getText());
+			Integer itemSKU = Integer.parseInt(itemSKUTextField.getText());
+			
+			// productInfo Setters
+			productInfo.setComponentType(componentType);
+			productInfo.setComponentType(componentType);
+			productInfo.setManufacturer(manufacturer);
+			productInfo.setDescription(description);
+			productInfo.setModelNum(modelNum);
+			productInfo.setSerialNum(serialNum);
+			productInfo.setRebateValue(rebateValue);
+			productInfo.setPrice(price);
+			productInfo.setWarrantyPeriod(warrantyPeriod);
+			productInfo.setWarrantyExpiry(warrantyExpiry);
+			productInfo.setInvoiceDate(invoiceDate);
+			productInfo.setInvoiceNum(invoiceNum);
+			productInfo.setSalesOrderNum(salesOrderNum);
+			productInfo.setItemSKU(itemSKU);
+			
+			// add component(s) to orderDetails
+			ArrayList<ProductInfo> components = new ArrayList<>();
+			components.add(productInfo);
+			orderDetails.setComponents(components);
+			guiManager.submitNewOrder(orderDetails);
+		}
 	}
 }
 
