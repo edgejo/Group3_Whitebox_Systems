@@ -30,6 +30,7 @@ public class NewOrderWindow extends JFrame {
 	private JTextField streetAddressTextField;
 	private JTextField phoneNumberTextField;
 	private JButton submit;
+	private JButton addComponent;
 	private JLabel lblDeliveryDate;
 	private JTextField deliverDateTextField;
 	private JLabel lblPaymentMethod;
@@ -67,6 +68,8 @@ public class NewOrderWindow extends JFrame {
 	private JLabel lblPaymentInformation;
 	private JLabel lblCustomerInformation;
 	private JLabel lblProductInformation;
+	
+	private ArrayList<ProductInfo> components = new ArrayList<>();
 
 	/**
 	 * Create the frame.
@@ -260,6 +263,9 @@ public class NewOrderWindow extends JFrame {
 		
 		submit = new JButton("Submit");
 		submit.addActionListener(new ButtonListener(this));
+		
+		addComponent = new JButton("Add Component");
+		addComponent.addActionListener(new ButtonListener(this));
 		
 		deliverDateTextField = new JTextField();
 		deliverDateTextField.setColumns(15);
@@ -489,6 +495,13 @@ public class NewOrderWindow extends JFrame {
 		gbc_submit.gridy = 16;
 		contentPane.add(submit, gbc_submit);
 		
+		GridBagConstraints gbc_addComp = new GridBagConstraints();
+		gbc_addComp.gridwidth = 3;
+		gbc_addComp.insets = new Insets(0, 0, 0, 5);
+		gbc_addComp.gridx = 4;
+		gbc_addComp.gridy = 16;
+		contentPane.add(addComponent, gbc_addComp);
+		
 		this.setVisible(true);
 	}
 	
@@ -506,8 +519,67 @@ public class NewOrderWindow extends JFrame {
 				} catch (Exception exception){
 					JOptionPane.showMessageDialog(newOrderWindow, "Invalid information");
 				}
+			} else if (e.getActionCommand().equals("Add Component")) {
+				try {
+					addNewComponent();
+				} catch (Exception exception){
+					JOptionPane.showMessageDialog(newOrderWindow, "Invalid information");
+				}
 			}
 		}
+	}
+	
+	
+	public void addNewComponent() throws Exception {
+
+		// get component parameters from GUI
+		ProductInfo productInfo = new ProductInfo();
+		String componentType = componentTypeTextField.getText();
+		String manufacturer = manufacturerTextField.getText();
+		String description = descriptionTextField.getText();
+		String modelNum = modelNumTextField.getText();
+		String serialNum = serialNumTextField.getText();
+		Double rebateValue = Double.parseDouble(rebateValueTextField.getText());
+		Double price = Double.parseDouble(priceTextField.getText());
+		String warrantyPeriod = warantyPeriodTextField.getText();
+		String warrantyExpiry = warantyExpiryTextField.getText();
+		String invoiceDate = invoiceDateTextField.getText();
+		Integer invoiceNum = Integer.parseInt(InvoiceNumTextField.getText());
+		Integer salesOrderNum = Integer.parseInt(salesTextField.getText());
+		Integer itemSKU = Integer.parseInt(itemSKUTextField.getText());
+					
+		// productInfo Setters
+		productInfo.setComponentType(componentType);
+		productInfo.setComponentType(componentType);
+		productInfo.setManufacturer(manufacturer);
+		productInfo.setDescription(description);
+		productInfo.setModelNum(modelNum);
+		productInfo.setSerialNum(serialNum);
+		productInfo.setRebateValue(rebateValue);
+		productInfo.setPrice(price);
+		productInfo.setWarrantyPeriod(warrantyPeriod);
+		productInfo.setWarrantyExpiry(warrantyExpiry);
+		productInfo.setInvoiceDate(invoiceDate);
+		productInfo.setInvoiceNum(invoiceNum);
+		productInfo.setSalesOrderNum(salesOrderNum);
+		productInfo.setItemSKU(itemSKU);
+
+		components.add(productInfo);
+		
+		componentTypeTextField.setText("");
+		manufacturerTextField.setText("");
+		descriptionTextField.setText("");
+		modelNumTextField.setText("");
+		serialNumTextField.setText("");
+		rebateValueTextField.setText("");
+		priceTextField.setText("");
+		warantyPeriodTextField.setText("");
+		warantyExpiryTextField.setText("");
+		invoiceDateTextField.setText("");
+		InvoiceNumTextField.setText("");
+		salesTextField.setText("");
+		itemSKUTextField.setText("");
+
 	}
 	
 	public void submitNewOrder() throws Exception{
@@ -574,7 +646,7 @@ public class NewOrderWindow extends JFrame {
 		productInfo.setItemSKU(itemSKU);
 		
 		// add component(s) to orderDetails
-		ArrayList<ProductInfo> components = new ArrayList<>();
+		//ArrayList<ProductInfo> components = new ArrayList<>();
 		components.add(productInfo);
 		orderDetails.setComponents(components);
 		guiManager.submitNewOrder(orderDetails);

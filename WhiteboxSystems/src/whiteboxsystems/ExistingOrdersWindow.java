@@ -76,6 +76,7 @@ public class ExistingOrdersWindow {
 
         // get orderDetails parameters
         for (OrderDetails orderDetails: existingOrders){
+         // for (int i = 0; i < orderDetails.getComponents().size(); i++) {	
         	Integer buildID = orderDetails.getBuildID();
         	CustomerInfo customerInfo = orderDetails.getCustomerInfo();
         	PaymentInfo paymentInfo = orderDetails.getPaymentInfo();
@@ -105,8 +106,9 @@ public class ExistingOrdersWindow {
         	Integer itemSKU = 0;
         	
         	if (!components.isEmpty()){
-	        	ProductInfo component = components.get(0);
-	        	componentType = component.getComponentType();
+	        	//ProductInfo component = components.get(i);
+        		ProductInfo component = components.get(0);
+        		componentType = component.getComponentType();
 	        	manufacturer = component.getManufacturer();
 	        	description = component.getDescription();
 	        	modelNum = component.getModelNum();
@@ -127,6 +129,7 @@ public class ExistingOrdersWindow {
         					invoiceNum, saleOrderNum, itemSKU
         					};
         	tableModel.addRow(row);
+          //}
         }
 
         orderTable = new JTable(tableModel);
