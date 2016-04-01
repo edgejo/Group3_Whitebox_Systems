@@ -59,7 +59,7 @@ public class DatabaseControllerTest {
 	@Test
 	public void testCreateNewOrderAndGetExistingOrder_NormalInput() {
 		DatabaseController databaseController = new DatabaseController();
-		databaseController.activate();
+		databaseController.displayExistingOrders();
 
 		//*** start of testCreateNewOrder ***
 		//BuildId
@@ -138,7 +138,7 @@ public class DatabaseControllerTest {
 	@Test
 	public void testCreateNewOrderAndGetExistingOrder_BogusInput() {
 		DatabaseController databaseController = new DatabaseController();
-		databaseController.activate();
+		databaseController.displayExistingOrders();
 
 		//*** start of testCreateNewOrder ***
 		//BuildId

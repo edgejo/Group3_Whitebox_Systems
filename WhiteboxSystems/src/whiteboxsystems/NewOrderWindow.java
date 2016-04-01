@@ -20,11 +20,9 @@ import java.awt.Font;
 
 public class NewOrderWindow extends JFrame {
 
-	/**
-	 * 
-	 */
+	private GUIManager guiManager;
+	
 	private static final long serialVersionUID = 1L;
-	DatabaseController databaseController;
 	private JPanel contentPane;
 	private JTextField buildIDTextField;
 	private JTextField nameTextField;
@@ -72,8 +70,9 @@ public class NewOrderWindow extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public NewOrderWindow(DatabaseController databaseController) {
-		this.databaseController = databaseController;
+	public NewOrderWindow(GUIManager guiManager) {
+		this.guiManager = guiManager;
+		
 		setTitle("WhiteBox Systems");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 865, 560);
@@ -561,11 +560,13 @@ public class NewOrderWindow extends JFrame {
 		gbc_submit.gridx = 2;
 		gbc_submit.gridy = 16;
 		contentPane.add(submit, gbc_submit);
+		
+		this.setVisible(true);
 	}
 	
 	// on pressing "Submit New Order" button
 	public void submitNewOrderForm(OrderDetails orderDetails){
-		databaseController.createNewOrder(orderDetails);
+		guiManager.submitNewOrder(orderDetails);
 	}
 }
 

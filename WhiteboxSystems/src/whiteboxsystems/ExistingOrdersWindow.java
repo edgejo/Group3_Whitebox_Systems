@@ -12,8 +12,8 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 
-public class GUI {
-	DatabaseController databaseController;
+public class ExistingOrdersWindow {
+	GUIManager guiManager;
 	JFrame mainFrame;
 	JPanel orderPanel;
 	JPanel buttonPanel;
@@ -21,12 +21,17 @@ public class GUI {
 	JTable orderTable;
 	JScrollPane scrollTable;
 	
-	public GUI(DatabaseController databaseController){
-		this.databaseController = databaseController;
+	public ExistingOrdersWindow(GUIManager guiManager){
+		this.guiManager = guiManager;
 	}
 	
 	// on start and after submitting new order
 	public void displayExistingOrders(ArrayList<OrderDetails> existingOrders){
+		if (mainFrame != null){
+	        mainFrame.setVisible(false);
+			mainFrame.dispose();
+		}
+	
 		createButtonPanel();
 		createOrderPanel(existingOrders);
 		createWindow();
@@ -39,11 +44,17 @@ public class GUI {
         mainFrame.setLayout(new BorderLayout()); 
         
         //add panels to frame
-        mainFrame.add(orderPanel, BorderLayout.NORTH);
+        mainFrame.add(orderPanel, BorderLayout.CENTER);
         mainFrame.add(buttonPanel, BorderLayout.SOUTH);
         
         mainFrame.pack();
         mainFrame.setResizable(true);
+        
+        // maximize the window
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        mainFrame.setBounds(100, 100, (int) dim.getWidth(), (int) dim.getHeight());
+        mainFrame.setLocationRelativeTo(null);
+        
         mainFrame.setVisible(true);
     }
     
@@ -135,16 +146,15 @@ public class GUI {
 }
 
 class ButtonListener implements ActionListener {
-	private GUI gui;
+	private ExistingOrdersWindow viewOrdersWindow;
 	
-	ButtonListener(GUI gui) {
-		this.gui = gui;
+	ButtonListener(ExistingOrdersWindow gui) {
+		this.viewOrdersWindow = gui;
 	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Create Order")) {
-			NewOrderWindow order = new NewOrderWindow(gui.databaseController);
-			order.setVisible(true);
+			this.viewOrdersWindow.guiManager.displayNewOrderWindow();
 		}
 	}
 }

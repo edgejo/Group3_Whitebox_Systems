@@ -3,18 +3,16 @@ import java.util.*;
 import orderinfo.*;
 
 public class DatabaseController {
-	private GUI gui;
+	private GUIManager guiManager;
 	private DatabaseAdapter databaseAdapter;
 	
 	public DatabaseController(){
-		this.gui = new GUI(this);
 		this.databaseAdapter = new SQLAdapter();
+		this.guiManager = new GUIManager(this);
 	}
 	
-	// TODO rename later; this method takes you back to the ExistingOrders page
-	public void activate(){
-		ArrayList<OrderDetails> existingOrders = getExistingOrders();
-		this.gui.displayExistingOrders(existingOrders);
+	public void displayExistingOrders(){
+		this.guiManager.displayExistingOrdersWindow();
 	}
 	
 	public ArrayList<OrderDetails> getExistingOrders(){
@@ -23,11 +21,9 @@ public class DatabaseController {
 	
 	public void createNewOrder(OrderDetails orderDetails){
 		databaseAdapter.addOrder(orderDetails);
-		activate();
 	}
 	
 	public static void main(String[] args) {
 		DatabaseController databaseController = new DatabaseController();
-		databaseController.activate();
 	}
 }
