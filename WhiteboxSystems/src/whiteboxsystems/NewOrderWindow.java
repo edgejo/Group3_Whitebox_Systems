@@ -25,9 +25,9 @@ public class NewOrderWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField buildIDTextField;
 	private JTextField nameTextField;
 	private JTextField emailTextField;
+	private JTextField streetAddressTextField;
 	private JTextField phoneNumberTextField;
 	private JButton submit;
 	private JLabel lblDeliveryDate;
@@ -87,24 +87,15 @@ public class NewOrderWindow extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblNewLabel = new JLabel("BuildID");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 1;
-		contentPane.add(lblNewLabel, gbc_lblNewLabel);
-		
-		buildIDTextField = new JTextField();
-		
-		GridBagConstraints gbc_buildID = new GridBagConstraints();
-		gbc_buildID.fill = GridBagConstraints.HORIZONTAL;
-		gbc_buildID.anchor = GridBagConstraints.NORTH;
-		gbc_buildID.insets = new Insets(0, 0, 5, 5);
-		gbc_buildID.gridx = 2;
-		gbc_buildID.gridy = 1;
-		contentPane.add(buildIDTextField, gbc_buildID);
-		buildIDTextField.setColumns(15);
+		lblCustomerInformation = new JLabel("Customer Information ");
+		lblCustomerInformation.setFont(new Font("Lucida Grande", Font.BOLD, 13));
+		lblCustomerInformation.setBackground(Color.GRAY);
+		GridBagConstraints gbc_lblCustomerInformation = new GridBagConstraints();
+		gbc_lblCustomerInformation.gridwidth = 3;
+		gbc_lblCustomerInformation.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCustomerInformation.gridx = 0;
+		gbc_lblCustomerInformation.gridy = 1;
+		contentPane.add(lblCustomerInformation, gbc_lblCustomerInformation);
 		
 		lblProductInformation = new JLabel("Product Information ");
 		lblProductInformation.setFont(new Font("Lucida Grande", Font.BOLD, 13));
@@ -116,15 +107,24 @@ public class NewOrderWindow extends JFrame {
 		gbc_lblProductInformation.gridy = 1;
 		contentPane.add(lblProductInformation, gbc_lblProductInformation);
 		
-		lblCustomerInformation = new JLabel("Customer Information ");
-		lblCustomerInformation.setFont(new Font("Lucida Grande", Font.BOLD, 13));
-		lblCustomerInformation.setBackground(Color.GRAY);
-		GridBagConstraints gbc_lblCustomerInformation = new GridBagConstraints();
-		gbc_lblCustomerInformation.gridwidth = 3;
-		gbc_lblCustomerInformation.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCustomerInformation.gridx = 0;
-		gbc_lblCustomerInformation.gridy = 2;
-		contentPane.add(lblCustomerInformation, gbc_lblCustomerInformation);
+		
+		JLabel lblNewLabel_1 = new JLabel("Name");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 2;
+		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		
+		nameTextField = new JTextField();
+		GridBagConstraints gbc_name = new GridBagConstraints();
+		gbc_name.fill = GridBagConstraints.HORIZONTAL;
+		gbc_name.anchor = GridBagConstraints.NORTH;
+		gbc_name.insets = new Insets(0, 0, 5, 5);
+		gbc_name.gridx = 2;
+		gbc_name.gridy = 2;
+		contentPane.add(nameTextField, gbc_name);
+		nameTextField.setColumns(15);
 		
 		IBComponentType = new JLabel("Component Type");
 		GridBagConstraints gbc_IBComponentType = new GridBagConstraints();
@@ -143,24 +143,24 @@ public class NewOrderWindow extends JFrame {
 		gbc_componentTypeTextField.gridy = 2;
 		contentPane.add(componentTypeTextField, gbc_componentTypeTextField);
 		
+		JLabel lblStreetAddress = new JLabel("Street Address");
+		GridBagConstraints gbc_lblStreetAddress = new GridBagConstraints();
+		gbc_lblStreetAddress.anchor = GridBagConstraints.WEST;
+		gbc_lblStreetAddress.insets = new Insets(0, 0, 5, 5);
+		gbc_lblStreetAddress.gridwidth = 2;
+		gbc_lblStreetAddress.gridx = 0;
+		gbc_lblStreetAddress.gridy = 3;
+		contentPane.add(lblStreetAddress, gbc_lblStreetAddress);
 		
-		JLabel lblNewLabel_1 = new JLabel("Name");
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 3;
-		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
-		nameTextField = new JTextField();
-		GridBagConstraints gbc_name = new GridBagConstraints();
-		gbc_name.fill = GridBagConstraints.HORIZONTAL;
-		gbc_name.anchor = GridBagConstraints.NORTH;
-		gbc_name.insets = new Insets(0, 0, 5, 5);
-		gbc_name.gridx = 2;
-		gbc_name.gridy = 3;
-		contentPane.add(nameTextField, gbc_name);
-		nameTextField.setColumns(15);
+		streetAddressTextField = new JTextField();
+		GridBagConstraints gbc_streetAddress = new GridBagConstraints();
+		gbc_streetAddress.fill = GridBagConstraints.HORIZONTAL;
+		gbc_streetAddress.anchor = GridBagConstraints.NORTH;
+		gbc_streetAddress.insets = new Insets(0, 0, 5, 5);
+		gbc_streetAddress.gridx = 2;
+		gbc_streetAddress.gridy = 3;
+		contentPane.add(streetAddressTextField, gbc_streetAddress);
+		streetAddressTextField.setColumns(15);
 		
 		IBManufacturer = new JLabel("Manufacturer");
 		GridBagConstraints gbc_IBManufacturer = new GridBagConstraints();
@@ -511,74 +511,73 @@ public class NewOrderWindow extends JFrame {
 	}
 	
 	public void submitNewOrder() throws Exception{
-		Integer buildID = Integer.parseInt(buildIDTextField.getText());
-		if (buildID != null){
-			OrderDetails orderDetails = new OrderDetails();
-			
-			// get customerInfo parameters from GUI
-			CustomerInfo customerInfo = new CustomerInfo();
-			String name = nameTextField.getText();
-			String email = emailTextField.getText();
-			String phoneNumber = phoneNumberTextField.getText();
-			String deliverDate = deliverDateTextField.getText();
-			
-			//customerInfo Setters
-			customerInfo.setName(name);
-			customerInfo.setEmail(email);
-			customerInfo.setPhoneNum(phoneNumber);
-			customerInfo.setDeliveryDate(deliverDate);
-			orderDetails.setCustomerInfo(customerInfo);
-	
-			// get paymentInfo parameters from GUI
-			PaymentInfo paymentInfo = new PaymentInfo();
-			String paymentMethod = paymentMethodTextField.getText();
-			Double totalValue = Double.parseDouble(totalValueTextField.getText());
-			String deliveryConfirmationFile = confirmationFileTextField.getText();
-	
-			// paymentInfo setters
-			paymentInfo.setPaymentMethod(paymentMethod);
-			paymentInfo.setTotalValue(totalValue);
-			paymentInfo.setDeliveryConfirmationFile(deliveryConfirmationFile);
-			orderDetails.setPaymentInfo(paymentInfo);
-	
-			// get component parameters from GUI
-			ProductInfo productInfo = new ProductInfo();
-			String componentType = componentTypeTextField.getText();
-			String manufacturer = manufacturerTextField.getText();
-			String description = descriptionTextField.getText();
-			String modelNum = modelNumTextField.getText();
-			String serialNum = serialNumTextField.getText();
-			Double rebateValue = Double.parseDouble(rebateValueTextField.getText());
-			Double price = Double.parseDouble(priceTextField.getText());
-			String warrantyPeriod = warantyPeriodTextField.getText();
-			String warrantyExpiry = warantyExpiryTextField.getText();
-			String invoiceDate = invoiceDateTextField.getText();
-			Integer invoiceNum = Integer.parseInt(InvoiceNumTextField.getText());
-			Integer salesOrderNum = Integer.parseInt(salesTextField.getText());
-			Integer itemSKU = Integer.parseInt(itemSKUTextField.getText());
-			
-			// productInfo Setters
-			productInfo.setComponentType(componentType);
-			productInfo.setComponentType(componentType);
-			productInfo.setManufacturer(manufacturer);
-			productInfo.setDescription(description);
-			productInfo.setModelNum(modelNum);
-			productInfo.setSerialNum(serialNum);
-			productInfo.setRebateValue(rebateValue);
-			productInfo.setPrice(price);
-			productInfo.setWarrantyPeriod(warrantyPeriod);
-			productInfo.setWarrantyExpiry(warrantyExpiry);
-			productInfo.setInvoiceDate(invoiceDate);
-			productInfo.setInvoiceNum(invoiceNum);
-			productInfo.setSalesOrderNum(salesOrderNum);
-			productInfo.setItemSKU(itemSKU);
-			
-			// add component(s) to orderDetails
-			ArrayList<ProductInfo> components = new ArrayList<>();
-			components.add(productInfo);
-			orderDetails.setComponents(components);
-			guiManager.submitNewOrder(orderDetails);
-		}
+		OrderDetails orderDetails = new OrderDetails();
+		
+		// get customerInfo parameters from GUI
+		CustomerInfo customerInfo = new CustomerInfo();
+		String name = nameTextField.getText();
+		String address = streetAddressTextField.getText();
+		String email = emailTextField.getText();
+		String phoneNumber = phoneNumberTextField.getText();
+		String deliverDate = deliverDateTextField.getText();
+		
+		//customerInfo Setters
+		customerInfo.setName(name);
+		customerInfo.setAddress(address);
+		customerInfo.setEmail(email);
+		customerInfo.setPhoneNum(phoneNumber);
+		customerInfo.setDeliveryDate(deliverDate);
+		orderDetails.setCustomerInfo(customerInfo);
+
+		// get paymentInfo parameters from GUI
+		PaymentInfo paymentInfo = new PaymentInfo();
+		String paymentMethod = paymentMethodTextField.getText();
+		Double totalValue = Double.parseDouble(totalValueTextField.getText());
+		String deliveryConfirmationFile = confirmationFileTextField.getText();
+
+		// paymentInfo setters
+		paymentInfo.setPaymentMethod(paymentMethod);
+		paymentInfo.setTotalValue(totalValue);
+		paymentInfo.setDeliveryConfirmationFile(deliveryConfirmationFile);
+		orderDetails.setPaymentInfo(paymentInfo);
+
+		// get component parameters from GUI
+		ProductInfo productInfo = new ProductInfo();
+		String componentType = componentTypeTextField.getText();
+		String manufacturer = manufacturerTextField.getText();
+		String description = descriptionTextField.getText();
+		String modelNum = modelNumTextField.getText();
+		String serialNum = serialNumTextField.getText();
+		Double rebateValue = Double.parseDouble(rebateValueTextField.getText());
+		Double price = Double.parseDouble(priceTextField.getText());
+		String warrantyPeriod = warantyPeriodTextField.getText();
+		String warrantyExpiry = warantyExpiryTextField.getText();
+		String invoiceDate = invoiceDateTextField.getText();
+		Integer invoiceNum = Integer.parseInt(InvoiceNumTextField.getText());
+		Integer salesOrderNum = Integer.parseInt(salesTextField.getText());
+		Integer itemSKU = Integer.parseInt(itemSKUTextField.getText());
+		
+		// productInfo Setters
+		productInfo.setComponentType(componentType);
+		productInfo.setComponentType(componentType);
+		productInfo.setManufacturer(manufacturer);
+		productInfo.setDescription(description);
+		productInfo.setModelNum(modelNum);
+		productInfo.setSerialNum(serialNum);
+		productInfo.setRebateValue(rebateValue);
+		productInfo.setPrice(price);
+		productInfo.setWarrantyPeriod(warrantyPeriod);
+		productInfo.setWarrantyExpiry(warrantyExpiry);
+		productInfo.setInvoiceDate(invoiceDate);
+		productInfo.setInvoiceNum(invoiceNum);
+		productInfo.setSalesOrderNum(salesOrderNum);
+		productInfo.setItemSKU(itemSKU);
+		
+		// add component(s) to orderDetails
+		ArrayList<ProductInfo> components = new ArrayList<>();
+		components.add(productInfo);
+		orderDetails.setComponents(components);
+		guiManager.submitNewOrder(orderDetails);
 	}
 }
 
