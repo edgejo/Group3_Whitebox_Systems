@@ -1,6 +1,9 @@
 package whiteboxsystems;
 import java.util.*;
 import orderinfo.*;
+import whiteboxsystems.DatabaseAdapter;
+import whiteboxsystems.GUIManager;
+import whiteboxsystems.SQLAdapter;
 
 public class DatabaseController {
 	private GUIManager guiManager;
