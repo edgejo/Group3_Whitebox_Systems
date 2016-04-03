@@ -72,23 +72,54 @@ public class CustomerInfo {
 	public void setDeliveryDate(String deliveryDate) {
 		this.deliveryDate = deliveryDate;
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-        if (o == this) {
-            return true;
-        }
- 
-        if (!(o instanceof CustomerInfo)) {
-            return false;
-        }
-         
-        CustomerInfo customerInfo = (CustomerInfo) o;
-		
-		return (this.getName().equals(customerInfo.getName())
-				&& this.getEmail().equals(customerInfo.getEmail())
-				&& this.getPhoneNum().equals(customerInfo.getPhoneNum())
-				&& this.getAddress().equals(customerInfo.getAddress())
-				&& this.getDeliveryDate().equals(customerInfo.getDeliveryDate()));
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((address == null) ? 0 : address.hashCode());
+		result = prime * result + ((deliveryDate == null) ? 0 : deliveryDate.hashCode());
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((phoneNum == null) ? 0 : phoneNum.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CustomerInfo other = (CustomerInfo) obj;
+		if (address == null) {
+			if (other.address != null)
+				return false;
+		} else if (!address.equals(other.address))
+			return false;
+		if (deliveryDate == null) {
+			if (other.deliveryDate != null)
+				return false;
+		} else if (!deliveryDate.equals(other.deliveryDate))
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		if (phoneNum == null) {
+			if (other.phoneNum != null)
+				return false;
+		} else if (!phoneNum.equals(other.phoneNum))
+			return false;
+		return true;
+	}
+	
 }

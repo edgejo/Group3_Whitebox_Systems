@@ -9,25 +9,21 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.logging.Logger;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.omg.CORBA.LocalObject;
-
-import com.sun.istack.internal.logging.Logger;
-import com.sun.javafx.Logging;
 
 import orderinfo.CustomerInfo;
 import orderinfo.OrderDetails;
 import orderinfo.PaymentInfo;
 import orderinfo.ProductInfo;
-import sun.util.logging.resources.logging;
 import whiteboxsystems.DatabaseController;
 
 public class DatabaseControllerTest {
-	Logger log = Logger.getLogger(LocalObject.class);
+	Logger log = Logger.getLogger(LocalObject.class.toString());
 	public static void deleteData(){
-		Logger log = Logger.getLogger(LocalObject.class);
+		Logger log = Logger.getLogger(LocalObject.class.toString());
 		log.info("Clearing all DB tables...");
 		ArrayList<String> tableNames = new ArrayList<String>(Arrays.asList(
 				"customer_info", "payment_info", "product_info"));

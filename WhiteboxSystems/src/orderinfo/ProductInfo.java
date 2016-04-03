@@ -140,31 +140,102 @@ public class ProductInfo {
 	public void setItemSKU(Integer itemSKU) {
 		this.itemSKU = itemSKU;
 	}
-	
+
 	@Override
-	public boolean equals(Object o){
-        if (o == this) {
-            return true;
-        }
- 
-        if (!(o instanceof ProductInfo)) {
-            return false;
-        }
-         
-        ProductInfo productInfo = (ProductInfo) o;
-		
-		return (this.getComponentType().equals(productInfo.getComponentType())
-				&& this.getManufacturer().equals(productInfo.getManufacturer())
-				&& this.getDescription().equals(productInfo.getDescription())
-				&& this.getModelNum().equals(productInfo.getModelNum())
-				&& this.getSerialNum().equals(productInfo.getSerialNum())
-				&& this.getRebateValue().equals(productInfo.getRebateValue())
-				&& this.getPrice().equals(productInfo.getPrice())
-				&& this.getWarrantyPeriod().equals(productInfo.getWarrantyPeriod())
-				&& this.getWarrantyExpiry().equals(productInfo.getWarrantyExpiry())
-				&& this.getInvoiceDate().equals(productInfo.getInvoiceDate())
-				&& this.getInvoiceNum().equals(productInfo.getInvoiceNum())
-				&& this.getSalesOrderNum().equals(productInfo.getSalesOrderNum())
-				&& this.getItemSKU().equals(productInfo.getItemSKU()));
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((componentType == null) ? 0 : componentType.hashCode());
+		result = prime * result + ((description == null) ? 0 : description.hashCode());
+		result = prime * result + ((invoiceDate == null) ? 0 : invoiceDate.hashCode());
+		result = prime * result + ((invoiceNum == null) ? 0 : invoiceNum.hashCode());
+		result = prime * result + ((itemSKU == null) ? 0 : itemSKU.hashCode());
+		result = prime * result + ((manufacturer == null) ? 0 : manufacturer.hashCode());
+		result = prime * result + ((modelNum == null) ? 0 : modelNum.hashCode());
+		result = prime * result + ((price == null) ? 0 : price.hashCode());
+		result = prime * result + ((rebateValue == null) ? 0 : rebateValue.hashCode());
+		result = prime * result + ((salesOrderNum == null) ? 0 : salesOrderNum.hashCode());
+		result = prime * result + ((serialNum == null) ? 0 : serialNum.hashCode());
+		result = prime * result + ((warrantyExpiry == null) ? 0 : warrantyExpiry.hashCode());
+		result = prime * result + ((warrantyPeriod == null) ? 0 : warrantyPeriod.hashCode());
+		return result;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProductInfo other = (ProductInfo) obj;
+		if (componentType == null) {
+			if (other.componentType != null)
+				return false;
+		} else if (!componentType.equals(other.componentType))
+			return false;
+		if (description == null) {
+			if (other.description != null)
+				return false;
+		} else if (!description.equals(other.description))
+			return false;
+		if (invoiceDate == null) {
+			if (other.invoiceDate != null)
+				return false;
+		} else if (!invoiceDate.equals(other.invoiceDate))
+			return false;
+		if (invoiceNum == null) {
+			if (other.invoiceNum != null)
+				return false;
+		} else if (!invoiceNum.equals(other.invoiceNum))
+			return false;
+		if (itemSKU == null) {
+			if (other.itemSKU != null)
+				return false;
+		} else if (!itemSKU.equals(other.itemSKU))
+			return false;
+		if (manufacturer == null) {
+			if (other.manufacturer != null)
+				return false;
+		} else if (!manufacturer.equals(other.manufacturer))
+			return false;
+		if (modelNum == null) {
+			if (other.modelNum != null)
+				return false;
+		} else if (!modelNum.equals(other.modelNum))
+			return false;
+		if (price == null) {
+			if (other.price != null)
+				return false;
+		} else if (!price.equals(other.price))
+			return false;
+		if (rebateValue == null) {
+			if (other.rebateValue != null)
+				return false;
+		} else if (!rebateValue.equals(other.rebateValue))
+			return false;
+		if (salesOrderNum == null) {
+			if (other.salesOrderNum != null)
+				return false;
+		} else if (!salesOrderNum.equals(other.salesOrderNum))
+			return false;
+		if (serialNum == null) {
+			if (other.serialNum != null)
+				return false;
+		} else if (!serialNum.equals(other.serialNum))
+			return false;
+		if (warrantyExpiry == null) {
+			if (other.warrantyExpiry != null)
+				return false;
+		} else if (!warrantyExpiry.equals(other.warrantyExpiry))
+			return false;
+		if (warrantyPeriod == null) {
+			if (other.warrantyPeriod != null)
+				return false;
+		} else if (!warrantyPeriod.equals(other.warrantyPeriod))
+			return false;
+		return true;
+	}
+	
 }
