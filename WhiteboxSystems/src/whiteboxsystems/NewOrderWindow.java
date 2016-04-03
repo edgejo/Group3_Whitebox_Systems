@@ -261,12 +261,6 @@ public class NewOrderWindow extends JFrame {
 		gbc_lblDeliveryDate.gridy = 6;
 		contentPane.add(lblDeliveryDate, gbc_lblDeliveryDate);
 		
-		submit = new JButton("Submit");
-		submit.addActionListener(new ButtonListener(this));
-		
-		addComponent = new JButton("Add Component");
-		addComponent.addActionListener(new ButtonListener(this));
-		
 		deliverDateTextField = new JTextField();
 		deliverDateTextField.setColumns(15);
 		GridBagConstraints gbc_txtDeliverdatetextfield = new GridBagConstraints();
@@ -488,19 +482,24 @@ public class NewOrderWindow extends JFrame {
 		gbc_itemSKUTextField.gridx = 6;
 		gbc_itemSKUTextField.gridy = 14;
 		contentPane.add(itemSKUTextField, gbc_itemSKUTextField);
-		GridBagConstraints gbc_submit = new GridBagConstraints();
-		gbc_submit.gridwidth = 3;
-		gbc_submit.insets = new Insets(0, 0, 0, 5);
-		gbc_submit.gridx = 2;
-		gbc_submit.gridy = 16;
-		contentPane.add(submit, gbc_submit);
+		
+		submit = new JButton("Submit");
+		submit.addActionListener(new ButtonListener(this));
+		
+		addComponent = new JButton("Add another component");
+		addComponent.addActionListener(new ButtonListener(this));
 		
 		GridBagConstraints gbc_addComp = new GridBagConstraints();
-		gbc_addComp.gridwidth = 3;
 		gbc_addComp.insets = new Insets(0, 0, 0, 5);
-		gbc_addComp.gridx = 4;
+		gbc_addComp.gridwidth = 3;
+		gbc_addComp.gridx = 0;
 		gbc_addComp.gridy = 16;
 		contentPane.add(addComponent, gbc_addComp);
+		GridBagConstraints gbc_submit = new GridBagConstraints();
+		gbc_submit.gridwidth = 3;
+		gbc_submit.gridx = 4;
+		gbc_submit.gridy = 16;
+		contentPane.add(submit, gbc_submit);
 		
 		this.setVisible(true);
 	}
@@ -519,7 +518,7 @@ public class NewOrderWindow extends JFrame {
 				} catch (Exception exception){
 					JOptionPane.showMessageDialog(newOrderWindow, "Invalid information");
 				}
-			} else if (e.getActionCommand().equals("Add Component")) {
+			} else if (e.getActionCommand().equals("Add another component")) {
 				try {
 					addNewComponent();
 				} catch (Exception exception){
@@ -645,7 +644,7 @@ public class NewOrderWindow extends JFrame {
 		productInfo.setSalesOrderNum(salesOrderNum);
 		productInfo.setItemSKU(itemSKU);
 		
-		// add component(s) to orderDetails
+		// Add another component(s) to orderDetails
 		components.add(productInfo);
 		orderDetails.setComponents(components);
 		guiManager.submitNewOrder(orderDetails);
