@@ -19,6 +19,7 @@ import orderinfo.OrderDetails;
 import orderinfo.PaymentInfo;
 import orderinfo.ProductInfo;
 import whiteboxsystems.DatabaseController;
+import whiteboxsystems.SQLAdapter;
 
 public class DatabaseControllerTest {
 	Logger log = Logger.getLogger(LocalObject.class.toString());
@@ -176,7 +177,15 @@ public class DatabaseControllerTest {
 		DatabaseController databaseController = new DatabaseController();
 		//*** start of testCreateNewOrder (input)***
 		//Creating BuildID:
-		Integer buildID = 123;
+		Integer buildID = null;
+		try {
+			buildID = new SQLAdapter().getNextBuildID();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
+		
 		//Creating CustomerInfo:
 		String customerInfoName = "John Doe Doe Doe Doe Doe Doe Bada Bo";
 		String customerInfoEmail = "cust@email.com 123";
@@ -233,7 +242,6 @@ public class DatabaseControllerTest {
 		components.add(prodInfo);
 		//Create order details of all of the above
 		OrderDetails od = new OrderDetails();
-		od.setBuildID(buildID); //BUG: Regardless of what you set buildID (here set to 123), it'll always be set to <last row number in table> (here set to 1 since table starts empty) 
 		od.setCustomerInfo(custInfo);
 		od.setPaymentInfo(payInfo);
 		od.setComponents(components);
@@ -279,24 +287,4 @@ public class DatabaseControllerTest {
 		}
 		log.info("Ending testCreateNewOrderAndGetExistingOrder_BogusInput...");
 	}
-
-	//more granular tests (unneeded?)
-//	@Test
-//	public void testDatabaseController() {
-//		DatabaseController dbController = new DatabaseController();
-//		fail("Not yet implemented");
-//	}
-
-//	@Test
-//	public void testActivate() {
-//		DatabaseController dbController = new DatabaseController();
-//		dbController.activate();
-//		fail("Not yet implemented");
-//	}
-
-//	@Test
-//	public void testMain() {
-//		fail("Not yet implemented");
-//	}
-
 }

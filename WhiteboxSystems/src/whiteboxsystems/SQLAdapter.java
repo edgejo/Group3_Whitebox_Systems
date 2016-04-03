@@ -132,7 +132,7 @@ public class SQLAdapter implements DatabaseAdapter {
 		}
 	}
 
-	private Integer getNextBuildID() throws Exception{
+	public Integer getNextBuildID() throws Exception{
 		String query = "SELECT MAX(" + PAYMENT_BUILD_ID + ") FROM payment_info;";
 		
 		Integer buildID = null;

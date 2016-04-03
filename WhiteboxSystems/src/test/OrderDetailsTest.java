@@ -2,7 +2,6 @@ package test;
 
 import static org.junit.Assert.*;
 
-import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 
