@@ -485,21 +485,21 @@ public class NewOrderWindow extends JFrame {
 		
 		submit = new JButton("Submit");
 		submit.addActionListener(new ButtonListener(this));
+		GridBagConstraints gbc_submit = new GridBagConstraints();
+		gbc_submit.insets = new Insets(0, 0, 0, 5);
+		gbc_submit.gridwidth = 3;
+		gbc_submit.gridx = 0;
+		gbc_submit.gridy = 16;
+		contentPane.add(submit, gbc_submit);
 		
 		addComponent = new JButton("Add another component");
 		addComponent.addActionListener(new ButtonListener(this));
 		
 		GridBagConstraints gbc_addComp = new GridBagConstraints();
-		gbc_addComp.insets = new Insets(0, 0, 0, 5);
 		gbc_addComp.gridwidth = 3;
-		gbc_addComp.gridx = 0;
+		gbc_addComp.gridx = 4;
 		gbc_addComp.gridy = 16;
 		contentPane.add(addComponent, gbc_addComp);
-		GridBagConstraints gbc_submit = new GridBagConstraints();
-		gbc_submit.gridwidth = 3;
-		gbc_submit.gridx = 4;
-		gbc_submit.gridy = 16;
-		contentPane.add(submit, gbc_submit);
 		
 		this.setVisible(true);
 	}
